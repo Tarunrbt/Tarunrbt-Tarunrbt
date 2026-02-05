@@ -1,0 +1,20 @@
+name: Track arXiv Papers
+
+on:
+  schedule:
+    - cron: "0 0 * * 0"
+
+jobs:
+  track:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - run: pip install requests
+
+      - run: python citations/arxiv_tracker.py
